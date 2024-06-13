@@ -7,10 +7,12 @@ application = Flask(__name__)
 import os
 port = os.environ['SERVER_PORT']
 
+proxy = urllib3.ProxyManager("http://127.0.0.1:%s" % port)
+
 
 @application.route("/")
 def hello_world():
-    response =  urllib3.request("GET", "127.0.0.1:%s" % port)
+    response =  proxy.request("GET", '/name')
     response_data = json.loads(response.data)
     name = response_data.get('name')
     return "<p>Hello, %s!</p>" % name

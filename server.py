@@ -3,6 +3,6 @@ from flask import Flask
 
 application = Flask(__name__)
 
-@application.route("/")
+@application.route("/name")
 def root():
     return '{"name": "ray"}'
